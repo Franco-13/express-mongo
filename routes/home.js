@@ -1,13 +1,30 @@
-const express = require('express');
+const express = require("express");
+const {
+  readUrls,
+  addUrls,
+  deleteUrl,
+  editUrlForm,
+  editUrl,
+  redirectUrl,
+} = require("../controllers/homeControllers");
+const { profileForm, profileEdit } = require("../controllers/profileController");
+const urlValidate = require("../middleware/urlValidate");
+const { userVerificate } = require("../middleware/userVerification");
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  const urls = [
-    {origin:"www.google.com/a1", shortUrl: "a1"},
-    {origin:"www.google.com/a2", shortUrl: "a2"},
-    {origin:"www.google.com/a3", shortUrl: "a3"},
-  ]
-  res.render("home", {urls})
-})
+router.get("/", userVerificate, readUrls);
+
+router.post("/", userVerificate, urlValidate, addUrls);
+
+router.get("/eliminar/:id", userVerificate, deleteUrl);
+
+router.get("/editar/:id", userVerificate, editUrlForm);
+
+router.post("/editar/:id", userVerificate, urlValidate, editUrl);
+
+router.get("/profile", userVerificate, profileForm);
+router.post("/profile", userVerificate, profileEdit);
+
+router.get("/:urlShort", redirectUrl);
 
 module.exports = router;
