@@ -83,7 +83,7 @@ const registerUser = async (req, res) => {
       from: '"Fred Foo" <foo@example.com>', // sender address
       to: user.email, // list of receivers
       subject: "Verificación de correo", // Subject line
-      html: `<a href="${process.env.PATH_HEROKU ||"http://localhost:3002"}/auth/confirmAccount/${user.tokenConfirmation}">Verifica</a>`, // html body
+      html: `<a href="${process.env.PATH_HEROKU ||"http://localhost:3002/"}auth/confirmAccount/${user.tokenConfirmation}">Verifica</a>`, // html body
     });
     
     req.flash("mensaje", {msg: "Revise su correo electrónico y valide su cuenta"})
