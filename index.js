@@ -18,7 +18,7 @@ const clientDB = require("./database/db")
 require("dotenv").config();
 require("./database/db");
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT;
 
 const app = express();
 
